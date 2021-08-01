@@ -1,6 +1,4 @@
-const request = window.indexedDB.open("budgetDB", 1);
-const db = request.result;
-let tx, store;
+const request = window.indexedDB.open("budgetDB", 3);
 
 window.onload = function (evt) {
   if (!window.indexedDB) {
@@ -11,6 +9,7 @@ window.onload = function (evt) {
 };
 
 request.onupgradeneeded = function (evt) {
+  const db = evt.target.result;
   db.createObjectStore("budgetStore", {
     autoIncrement: true,
   });
@@ -26,21 +25,21 @@ request.onsuccess = function (evt) {
   }
 };
 
-export function saveRecord(data) {
-  request.onsuccess = function (evt) {
-    tx = db.transaction("budgetStore", "readwrite");
-    store = tx.objectStore("budgetStore");
-    store.add(data);
+function saveRecord(data) {
+  const db = request.result;
+  const tx = db.transaction(["budgetStore"], "readwrite");
+  const store = tx.objectStore("budgetStore");
+  store.add(data);
 
-    db.onerror = function (err) {
-      console.log("Save record error:", e.target.errorCode);
-    };
+  db.onerror = function (err) {
+    console.log("Save record error:", evt.target.errorCode);
   };
 }
 
 function checkDB() {
-  tx = db.transaction(["budgetStore"], "readwrite");
-  store = tx.objectStore("budgetStore");
+  const db = request.result;
+  const tx = db.transaction(["budgetStore"], "readwrite");
+  const store = tx.objectStore("budgetStore");
   const getAllData = store.getAll();
   getAllData.onsuccess = function () {
     if (getAllData.result.length > 0) {
@@ -55,8 +54,9 @@ function checkDB() {
         .then((response) => response.json())
         .then((res) => {
           if (res.length !== 0) {
-            tx = db.transaction(["budgetStore"], "readwrite");
-            tx.objectStore("budgetStore").clear();
+            const tx = db.transaction(["budgetStore"], "readwrite");
+            const store = tx.objectStore("budgetStore");
+            store.clear();
 
             console.log("Store cleared!");
           }
@@ -65,4 +65,5 @@ function checkDB() {
   };
 }
 
+module.exports.saveRecord = saveRecord;
 window.addEventListener("online", checkDB);

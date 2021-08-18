@@ -1,6 +1,8 @@
 # Online/Offline Budget Tracker
 
-[Budget Tracker]()
+[Budget Tracker](https://budget-tracker-21-19.herokuapp.com/)
+
+![Budget Tracker Demo](public/images/budgetTrackerDemo.gif)
 
 ## User Story
 
@@ -20,16 +22,16 @@ THEN that will be shown on the page, and added to their transaction history when
 
 ## Requirements
 
-- [] Allow for offline access and functionality.
+- [x] Allow for offline access and functionality.
 
   - Offline Functionality:
 
-    - [] Enter deposits offline
+    - [x] Enter deposits offline
 
-    - [] Enter expenses offline
+    - [x] Enter expenses offline
 
   - When brought back online:
 
-    - [] Offline entries should be added to tracker.
+    - [x] Offline entries should be added to tracker.
 
-- [] Deploy your application with Heroku and MongoDB Atlas.
+- [x] Deploy your application with Heroku and MongoDB Atlas.

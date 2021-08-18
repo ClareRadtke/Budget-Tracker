@@ -1,6 +1,6 @@
 # Online/Offline Budget Tracker
 
-[Budget Tracker](https://budget-tracker-21-19.herokuapp.com/)
+[Budget Tracker](https://budget-tracker-21-19.herokuapp.com/) allows you to track your withdrawals and deposits both online and offline.
 
 ![Budget Tracker Demo](public/images/budgetTrackerDemo.gif)
 
